@@ -65,8 +65,8 @@ def results_hash(votes):
     for vote in votes:
         for candidate, mention in vote.items():
             candidates_results[candidate][mention] +=1
-    print(candidates_results)
-    #return candidates_results
+    #print(candidates_results)
+    return candidates_results
 
 
 ##################################################

@@ -1,55 +1,61 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
+import random
+import json
 
-quotes = [
+# json = JavaScript Object Notation
 
-    "Ecoutez-moi, Monsieur Shakespeare, nous avons beau être ou ne pas être, nous sommes !", 
+quotes = []
+characters = []
+#quotes = ["Ecoutez-moi, Monsieur Shakespeare, nous avons beau être ou ne pas être, nous sommes !","On doit pouvoir choisir entre s'écouter parler et se faire entendre."]
+#characters = ["alvin et les Chipmunks","Babar","betty boop", "calimero","casper","le chat potté","Kirikou"]
 
-    "On doit pouvoir choisir entre s'écouter parler et se faire entendre."
+def import_list_from_json():
+	value = []
+	with open('characters.json') as f:
+		data = json.load(f)
+		for character in data:
+			value.append(character['character'])
+		return value
 
-]
+def import_quote_from_json():
+	value = []
+	with open('quote.json')	as f:
+		data = json.load(f)
+		for citation in data:
+			value.append(citation['quote'])
+		return value
 
+characters = import_list_from_json()
+quotes = import_quote_from_json()
 
-characters = [
-
-    "alvin et les Chipmunks", 
-
-    "Babar", 
-
-    "betty boop", 
-
-    "calimero", 
-
-    "casper", 
-
-    "le chat potté", 
-
-    "Kirikou"
-
-]
-
-user_answer = raw_input("Tapez entrée pour connaitre une autre citation ou B pour quitter le programme.")
-print(user_answer)
-
-# Show random quote
-
-if user_answer == "B":
-	pass
-# If user_answer == "B":
-	#- leave the program
-elif user_answer == "C":
-	print("Reponse C")
-else:
-	pass
-# Else:
-	# show another quote
-
-
-# Function random quote
-def show_random_quote(my_list):
-	quote = my_list[1]
+def show_random_item(my_list):
+	rand_numb = random.randint(0,len(my_list) -1)
+	quote = my_list[rand_numb]
 	return quote
-	# get a random number
-	# get a quote from an array
-	# print the quote in the interpreter, print() ?
 
-print(show_random_quote(quotes))
+def show_random_quote(my_list):
+	rand_numb = random.randint(0, len(my_list) -1)
+	quote = my_list[rand_numb].replace("\n\t\t\t\t\t\t\t\t\t", "\n\t\t")
+	return quote
+
+def capitalize(words):
+	for word in words:
+		word.capitalize()
+
+def message(character, quote):
+	capitalize(character)
+	capitalize(quote)
+	return "{} a dit : {}".format(character, quote)
+
+user_answer = ""
+
+
+while user_answer != "B":
+	print(message(show_random_item(characters), show_random_quote(quotes)))
+	user_answer = input("\n\nTapez entrée pour connaitre une autre citation ou B pour quitter le programme.")
+
+
+
+	
+
+#print(show_random_quote(quotes))

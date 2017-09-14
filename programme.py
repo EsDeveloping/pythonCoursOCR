@@ -48,7 +48,25 @@ def create_votes():
 #################### FUNCTIONS ###################
 ##################################################
 
-# Your code goes here
+candidates = {
+    'hermione': [0,1,2,3,4,5,6],
+    'balou': [0,1,2,3,4,5,6],
+    'chuck-norris': [0,1,2,3,4,5,6],
+    'elsa': [0,1,2,3,4,5,6],
+    'gandalf': [0,1,2,3,4,5,6],
+    'beyonce': [0,1,2,3,4,5,6]
+}
+
+def results_hash(votes):
+    candidates_results = { 
+        candidate: [0]*len(MENTIONS)
+        for candidate in CANDIDATES.keys()
+    }
+    for vote in votes:
+        for candidate, mention in vote.items():
+            candidates_results[candidate][mention] +=1
+    print(candidates_results)
+    #return candidates_results
 
 
 ##################################################
@@ -57,6 +75,7 @@ def create_votes():
 
 def main():
     votes = create_votes()
+    results = results_hash(votes)
 
 if __name__ == '__main__':
-main()
+    main()
